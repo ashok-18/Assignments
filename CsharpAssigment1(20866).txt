@@ -1,0 +1,120 @@
+2.Write a program to print if the given day is a working day or holiday.  Accept a number representing the day from the user and apply below logic
+	a. The number should be >0 and <=7.  
+	b. If the number is b/n 1 to 5 it is a working day
+	c. If the number is >5 - holiday
+
+using System;
+namespace Assignment
+{
+    class Program
+    {
+	public static void Main()
+            {
+            	int n;
+            	Console.WriteLine("Enter the Number:");
+            	n = int.Parse(Console.ReadLine());
+            	if (n>=1 && n <= 5)
+            	{
+                	Console.WriteLine("It is a Working Day");
+            	}
+            	else if (n > 5 && n<=7)
+            	{
+                	Console.WriteLine("It is a Holiday");
+            	}
+            	else
+            	{
+                	Console.WriteLine("Invalid Number");
+            	}
+           }
+    }
+}
+
+
+7.Write C# function to find biggest prime number in a given array
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+namespace Assignment
+{
+    class primenumber
+    {
+        static void prime(int[] arr, int n)
+        {
+            int max_val = arr.Max();
+            List<bool> prime = new List<bool>();
+            for (int i = 0; i < max_val + 1; i++)
+                prime.Add(true);
+            prime.Insert(0, false);
+            prime.Insert(1, false);
+            for (int p = 2; p * p <= max_val; p++)
+            {
+                if (prime[p] == true)
+                {
+                    for (int i = p * 2; i <= max_val; i += p)
+                        prime.Insert(i, false);
+                }
+            }
+           int maximum = int.MinValue;
+            for (int i = 0; i < n; i++)
+                if (prime[arr[i]])
+                {
+
+                    maximum = Math.Max(maximum, arr[i]);
+                }
+            Console.WriteLine("Maximum Prime Number in a array is: " + maximum);
+        }
+        public static void Main()
+        {
+            int[] arr = { 1, 2, 3, 4, 5, 7, 6, 8};
+            int n = arr.Length;
+
+            prime(arr, n);
+        }
+    }
+}
+
+
+8)Modify question 7 to so that it returns both the position and Also the number?
+
+using System;
+
+namespace Assignment
+{
+    class Program
+    {
+        static readonly int limit = 1000000;
+		static int[] position = new int[limit + 1];
+
+		
+		
+		static void sieve()
+		{
+			
+			position[0] = -1;
+			position[1] = -1;
+
+			
+			int pos = 0;
+			for (int i = 2; i <= limit; i++)
+			{
+				if (position[i] == 0)
+				{
+
+					
+					position[i] = ++pos;
+					for (int j = i * 2; j <= limit; j += i)
+						position[j] = -1;
+				}
+			}
+		}
+
+		
+		public static void Main(String[] args)
+		{
+			sieve();
+
+			int n = 11;
+			Console.Write(position[n]);
+		}
+	}
